@@ -4,7 +4,7 @@
   "description": "Implementação do https://www.tabnews.com.br",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run services:up && next dev",
     "services:up": "docker compose -f infra/compose.yaml up -d",
     "services:stop": "docker compose stop",
     "services:down": "docker compose down",
