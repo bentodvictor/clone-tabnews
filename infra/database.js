@@ -1,3 +1,4 @@
+import { errorToJSON } from "next/dist/server/render";
 import { Client } from "pg";
 
 async function query(queryObject) {
@@ -8,13 +9,14 @@ async function query(queryObject) {
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
   });
-  await client.connect();
 
   try {
+    await client.connect();
     const result = await client.query(queryObject);
     return result;
   } catch (err) {
     console.error(err);
+    throw err;
   } finally {
     await client.end();
   }
